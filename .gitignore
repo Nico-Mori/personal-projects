@@ -1,2 +1,3 @@
 *.ipynb_checkpoints
-Big Mac Index/.ipynb_checkpoints/BigMacIndex-checkpoint.ipynb
+*.DS_Store
+.Rhistory
