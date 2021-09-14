@@ -1,3 +1,8 @@
 *.ipynb_checkpoints
+<<<<<<< Updated upstream
 *.DS_Store
 .Rhistory
+=======
+Big Mac Index/.ipynb_checkpoints/BigMacIndex-checkpoint.ipynb
+.DS_Store
+>>>>>>> Stashed changes
