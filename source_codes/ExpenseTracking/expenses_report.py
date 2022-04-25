@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
@@ -17,8 +18,9 @@ for i in filepaths:
 
     temp = pd.read_csv('rawdata/'+i)
 
-    #Remove last row
+    #Remove unnecesary rows
     temp = temp[:-1]
+    temp = temp[temp['Categorie']!='Pagamento']
 
     #Unified criteria for ammount column
     temp['Costo'] = pd.to_numeric(temp['Costo'])
@@ -37,7 +39,7 @@ df = df[['Costo','Data','Descrizione','Categorie']]
 
 
 ### Add custom categories ###
-categories = pd.read_csv('splitwise_cat.csv', sep=';')
+categories = pd.read_csv('extras/custom_cat.csv', sep=';')
 
 #Merge and drop irrelevant columns
 df_cat = df.merge(categories, on='Categorie', how='left')
@@ -62,8 +64,10 @@ ax.xaxis.tick_top()
 df_summ.iloc[:-1,:-1].plot.barh(stacked=True, figsize=(12,8), table=np.round(df_summ, 2), ax=ax)
 
 #Save graph and categorized expenses
-plt.savefig(fname='expenses_summary.png', dpi=300, facecolor='white', bbox_inches='tight')
-df_cat.to_excel('expenses_detail.xlsx', index=False)
+today=str(datetime.now().date())
+
+plt.savefig(fname=f'expenses_summary_{today}.png', dpi=300, facecolor='white', bbox_inches='tight')
+df_cat.to_csv(f'expenses_detail_{today}.csv', sep=';', index=False)
 
 
 

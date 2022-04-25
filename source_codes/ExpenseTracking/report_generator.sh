@@ -1,0 +1,1 @@
+python3 /Users/nicolamori/Google\ Drive/Spese\ v2/expenses_report.py
